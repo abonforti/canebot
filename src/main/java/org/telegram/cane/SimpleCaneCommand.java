@@ -21,7 +21,6 @@ import org.telegram.cane.processors.impl.FantaProcessor;
 import org.telegram.cane.processors.impl.MosconiProcessor;
 import org.telegram.cane.processors.impl.SearchProcessor;
 import org.telegram.cane.processors.impl.SenderProcessor;
-import org.telegram.cane.processors.impl.SerieAProcessor;
 import org.telegram.cane.processors.impl.TextProcessor;
 
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
@@ -35,9 +34,9 @@ public class SimpleCaneCommand extends AbstractCommand {
     protected static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final Logger LOG = Logger.getLogger(SimpleCaneCommand.class);
 
-    List<MessageProcessor> processors;
+    private List<MessageProcessor> processors;
 
-    public SimpleCaneCommand(final Message message, final RequestHandler requestHandler) {
+    private SimpleCaneCommand(final Message message, final RequestHandler requestHandler) {
         super(message, requestHandler);
 
         // Loads properties from property file in resource folder
@@ -52,14 +51,12 @@ public class SimpleCaneCommand extends AbstractCommand {
         TextProcessor textProcessor = new TextProcessor();
         ArbitroProcessor arbitroProcessor = new ArbitroProcessor();
         SenderProcessor senderProcessor = new SenderProcessor();
-        SerieAProcessor serieAProcessor = new SerieAProcessor();
         FantaProcessor fantaProcessor = new FantaProcessor();
 
         processors.add(fantaProcessor);
         processors.add(eventProcessor);
         processors.add(mosconiProcessor);
         processors.add(arbitroProcessor);
-        processors.add(serieAProcessor);
         processors.add(searchProcessor);
         processors.add(senderProcessor);
         processors.add(textProcessor);
@@ -96,7 +93,7 @@ public class SimpleCaneCommand extends AbstractCommand {
 
     }
 
-    protected String buildBackupFileName() {
+    private String buildBackupFileName() {
         Calendar c = Calendar.getInstance();
         return "Backup_" + c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
     }
