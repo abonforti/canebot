@@ -11,7 +11,7 @@ public class DBUtils {
 
     private static final Logger LOG = Logger.getLogger(DBUtils.class);
 
-    protected static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    protected static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     protected static Connection conn = null;
 

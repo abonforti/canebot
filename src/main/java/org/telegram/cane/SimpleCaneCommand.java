@@ -31,12 +31,12 @@ import io.github.nixtabyte.telegram.jtelebot.server.impl.AbstractCommand;
 
 public class SimpleCaneCommand extends AbstractCommand {
 
-    protected static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    protected static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final Logger LOG = Logger.getLogger(SimpleCaneCommand.class);
 
     private List<MessageProcessor> processors;
 
-    private SimpleCaneCommand(final Message message, final RequestHandler requestHandler) {
+    public SimpleCaneCommand(final Message message, final RequestHandler requestHandler) {
         super(message, requestHandler);
 
         // Loads properties from property file in resource folder
