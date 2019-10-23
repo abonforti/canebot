@@ -62,14 +62,6 @@ public class FantaProcessor extends AbstractMessageProcessor implements MessageP
                     String team2 = teams.size() > 1 ? teams.get(1).text() : "";
                     Match match = new Match(team1, team2, matchResult, null);
                     matches.add(match.onlyResultToString());
-
-                    /*Elements results = itemBox.select(SPAN_NUMBIG4_PULL_RIGHT);
-                    Map<Integer, String> scoresMap = getScoresMap(results);
-                    Elements names = itemBox.getElementsByTag("h3");
-                    String matchResults = getMatchResults(names);
-                    Map<Integer, String> teams = getTeamData(index, names);
-                    Match match = new Match(teams.get(0), teams.get(1), matchResults, scoresMap);
-                    matches.add(match.toString());*/
                 }
                 try {
                     for (String matchString : matches) {
