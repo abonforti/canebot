@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>zcanebot</groupId>
 	<artifactId>cane.bot</artifactId>
-	<version>${revision}</version>
+	<version>1.0</version>
 	<name>zcanebot</name>
 	<description>zcanebot</description>
 
@@ -122,23 +122,6 @@
 	        	<groupId>org.apache.maven.plugins</groupId>
 	        	<artifactId>maven-enforcer-plugin</artifactId>
 	        	<version>3.0.0-M2</version>
-		        <executions>
-		          <execution>
-		            <id>enforce-property</id>
-		            <goals>
-		              <goal>enforce</goal>
-		            </goals>
-		            <configuration>
-		              <rules>
-		                <requireProperty>
-		                  <property>revision</property>
-		                  <message>"Revision version must be specified! (launch mvn -Drevision=1.x-SNAPSHOT clean install)"</message>
-		                </requireProperty>
-		              </rules>
-		              <fail>true</fail>
-		            </configuration>
-		          </execution>
-		        </executions>
 	      </plugin>
 		</plugins>
 	</build>
