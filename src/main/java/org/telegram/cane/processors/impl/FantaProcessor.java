@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class FantaProcessor extends AbstractMessageProcessor implements MessageProcessor {
 
-    private static final String DIV_ROW_ITEM_BOX = "div.row.itemBox";
+    private static final String DIV_ROW_ITEM_BOX = ".list-group-item.match.match-result.row.highlight";
     public static final String SPAN_NUMBIG4_PULL_RIGHT = "span.numbig4.pull-right";
     public static final String NUMBIG_3 = "numbig3";
 
@@ -55,13 +55,21 @@ public class FantaProcessor extends AbstractMessageProcessor implements MessageP
                 int index = 0;
                 List<String> matches = new ArrayList<String>();
                 for (Element itemBox : itemBoxes) {
-                    Elements results = itemBox.select(SPAN_NUMBIG4_PULL_RIGHT);
+                    Elements teams = itemBox.select(".team-name");
+                    Elements goals = itemBox.select(".team-score");
+                    String matchResult = goals.size() > 1 ? goals.get(0).text() + "-"+ goals.get(1).text() : "Riposa";
+                    String team1 = teams.size() > 0 ? teams.get(0).text() : "";
+                    String team2 = teams.size() > 1 ? teams.get(1).text() : "";
+                    Match match = new Match(team1, team2, matchResult, null);
+                    matches.add(match.onlyResultToString());
+
+                    /*Elements results = itemBox.select(SPAN_NUMBIG4_PULL_RIGHT);
                     Map<Integer, String> scoresMap = getScoresMap(results);
                     Elements names = itemBox.getElementsByTag("h3");
                     String matchResults = getMatchResults(names);
                     Map<Integer, String> teams = getTeamData(index, names);
                     Match match = new Match(teams.get(0), teams.get(1), matchResults, scoresMap);
-                    matches.add(match.toString());
+                    matches.add(match.toString());*/
                 }
                 try {
                     for (String matchString : matches) {

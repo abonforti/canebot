@@ -61,9 +61,9 @@ public class CaneConstants {
     public static final String LOG4J_PROPERTIES = "log4j.properties";
 
 
-    public static final String FANTAURL = "http://leghe.fantagazzetta.com/ciampion-league/formazioni/";
-    public static final String CUP_ID ="79888";
-    public static final String SERIEA_ID ="79365";
+    public static final String FANTAURL = "https://leghe.fantacalcio.it/ciampion-league?id=";
+    public static final String CUP_ID ="277907";
+    public static final String SERIEA_ID ="277979";
     public static final String FANTASERIEA ="fantaSerieA";
     public static final String FANTACOPPA="fantaCoppa";
 

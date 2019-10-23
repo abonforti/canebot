@@ -26,4 +26,9 @@ public class Match {
     public String toString(){
         return this.team1+" VS "+this.team2+" = "+this.result + " ("+this.scores.get(0)+" - "+this.scores.get(1)+")";
     }
+
+    public String onlyResultToString(){
+        String printedResult = StringUtils.isNotEmpty(this.team2) ? (this.team1 +" VS "+this.team2+" = "+this.result) : (this.team1 + " " + this.result);
+        return printedResult;
+    }
 }
