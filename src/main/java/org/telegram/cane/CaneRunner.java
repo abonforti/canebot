@@ -6,11 +6,10 @@ import java.io.InputStream;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.telegram.cane.constants.CaneConstants;
+import org.telegram.cane.core.PropsUtils;
 
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandDispatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandQueue;
-import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandWatcher;
-import org.telegram.cane.core.PropsUtils;
 
 public class CaneRunner {
 
@@ -37,7 +36,7 @@ public class CaneRunner {
         DefaultCommandDispatcher disp = new DefaultCommandDispatcher(100, 10, new DefaultCommandQueue());
         disp.startUp();
 
-        DefaultCommandWatcher watcher = new DefaultCommandWatcher(500, 100, CaneConstants.BOT_ID, disp, new CaneCommandFactory());
+        CaneCommandWatcher watcher = new CaneCommandWatcher(500, 100, CaneConstants.BOT_ID, disp, new CaneCommandFactory());
         watcher.startUp();
     }
 }
