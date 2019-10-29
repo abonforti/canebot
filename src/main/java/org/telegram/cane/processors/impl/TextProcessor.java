@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.telegram.cane.constants.CaneConstants;
 import org.telegram.cane.core.DBUtils;
 import org.telegram.cane.processors.AbstractMessageProcessor;
@@ -26,7 +25,10 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.User;
 
 public class TextProcessor extends AbstractMessageProcessor implements MessageProcessor {
 
-    private static final Logger LOG = Logger.getLogger(TextProcessor.class);
+    @Override
+    protected boolean isUnderAuthentication() {
+        return false;
+    }
 
     @Override
     public boolean process(Message incomingMsg, RequestHandler requestHandler) throws JsonParsingException, TelegramServerException {

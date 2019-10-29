@@ -1,7 +1,5 @@
 package org.telegram.cane.constants;
 
-import org.telegram.cane.core.PropsUtils;
-
 public class CaneConstants {
 
     public static final String BOT_ID = System.getenv("BOT_TOKEN_ID");
@@ -13,11 +11,22 @@ public class CaneConstants {
      */
     public static final String INSULTI_TABLE = "INSULTI";
     public static final String MOSCONI_TABLE = "mosconi";
+    public static final String USERS_TABLE = "USERS";
+    public static final String GROUPS_TABLE = "USERGROUPS";
     public static final String INSERT_QUERY = "INSERT INTO `" + INSULTI_TABLE + "` (`input`, `output`) VALUES (?, ?);";
     public static final String DELETE_QUERY = "DELETE FROM `" + INSULTI_TABLE + "` WHERE `input` = ? AND `output` = ?;";
     public static final String INSULTI_QUERY = SELECT_STAR_FROM + INSULTI_TABLE + "` WHERE LOWER(input) LIKE LOWER(?);";
     public static final String MOSCONI_ALL_QUERY = SELECT_STAR_FROM + MOSCONI_TABLE + "`;";
     public static final String SELECT_ALL_INSULTI = SELECT_STAR_FROM + INSULTI_TABLE + "`;";
+
+    /**
+     * SQL-query-related-userandgroups
+     */
+    public static final String SELECT_PK_FROM_USER = "SELECT PK FROM " + USERS_TABLE + " WHERE telegramId=?";
+    public static final String SELECT_PK_FROM_USERGROUPS = "SELECT PK FROM " + GROUPS_TABLE + " WHERE groupname=?";
+    public static final String INSERT_USER_QUERY = "INSERT INTO " + USERS_TABLE + " (telegramId) values LOWER(?);";
+    public static final String INSERT_GROUP_QUERY = "INSERT INTO " + GROUPS_TABLE + " (groupname) values LOWER(?);";
+    public static final String INSERT_USER_GROUP_QUERY = "INSERT INTO user2groups VALUES ((select pk from users where telegramId = ?), (select pk from canebotdb.usergroups where groupname = ?));";
 
     /**
      * SQL-query-related-arbitri constants
@@ -45,6 +54,8 @@ public class CaneConstants {
     public static final String LEARN_COMMAND = "Canebot,impara:";
     public static final String DELETE_COMMAND = "Canebot,dimentica:";
     public static final String SEARCH_IMG_COMMAND = "Canebot,search:";
+    public static final String ADD_USERTOGROUP = "Canebot,addusertogroup:";
+    public static final String LIST_USERGROUPS = "Canebot,listusergroups";
 
     /**
      * Useful constants
@@ -60,12 +71,11 @@ public class CaneConstants {
     public static final String LOCAL_PROPERTIES = "local.properties";
     public static final String LOG4J_PROPERTIES = "log4j.properties";
 
-
     public static final String FANTAURL = "https://leghe.fantacalcio.it/ciampion-league?id=";
-    public static final String CUP_ID ="277907";
-    public static final String SERIEA_ID ="277979";
-    public static final String FANTASERIEA ="fantaSerieA";
-    public static final String FANTACOPPA="fantaCoppa";
+    public static final String CUP_ID = "277907";
+    public static final String SERIEA_ID = "277979";
+    public static final String FANTASERIEA = "fantaSerieA";
+    public static final String FANTACOPPA = "fantaCoppa";
 
     private CaneConstants() {
         // prevent instantiating this class, 

@@ -18,10 +18,12 @@ import org.telegram.cane.processors.MessageProcessor;
 import org.telegram.cane.processors.impl.ArbitroProcessor;
 import org.telegram.cane.processors.impl.EventProcessor;
 import org.telegram.cane.processors.impl.FantaProcessor;
+import org.telegram.cane.processors.impl.GoepArbitroProcessor;
 import org.telegram.cane.processors.impl.MosconiProcessor;
 import org.telegram.cane.processors.impl.SearchProcessor;
 import org.telegram.cane.processors.impl.SenderProcessor;
 import org.telegram.cane.processors.impl.TextProcessor;
+import org.telegram.cane.processors.impl.UsergroupProcessor;
 
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
@@ -34,7 +36,7 @@ public class SimpleCaneCommand extends AbstractCommand {
     protected static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final Logger LOG = Logger.getLogger(SimpleCaneCommand.class);
 
-    private List<MessageProcessor> processors;
+    private final List<MessageProcessor> processors;
 
     public SimpleCaneCommand(final Message message, final RequestHandler requestHandler) {
         super(message, requestHandler);
@@ -45,22 +47,25 @@ public class SimpleCaneCommand extends AbstractCommand {
         scheduleDBBackup();
 
         processors = new ArrayList<>();
+        UsergroupProcessor usergroupProcessor = new UsergroupProcessor();
         EventProcessor eventProcessor = new EventProcessor();
         SearchProcessor searchProcessor = new SearchProcessor();
         MosconiProcessor mosconiProcessor = new MosconiProcessor();
         TextProcessor textProcessor = new TextProcessor();
         ArbitroProcessor arbitroProcessor = new ArbitroProcessor();
+        GoepArbitroProcessor goepArbitroProcessor = new GoepArbitroProcessor();
         SenderProcessor senderProcessor = new SenderProcessor();
         FantaProcessor fantaProcessor = new FantaProcessor();
 
+        processors.add(usergroupProcessor);
         processors.add(fantaProcessor);
         processors.add(eventProcessor);
         processors.add(mosconiProcessor);
         processors.add(arbitroProcessor);
+        processors.add(goepArbitroProcessor);
         processors.add(searchProcessor);
         processors.add(senderProcessor);
         processors.add(textProcessor);
-
 
     }
 
@@ -115,7 +120,7 @@ public class SimpleCaneCommand extends AbstractCommand {
 
             for (MessageProcessor mp : processors) {
 
-                boolean interrupt = mp.process(message, requestHandler);
+                boolean interrupt = mp.processIncomingMessage(message, requestHandler);
                 if (interrupt)
                     break;
             }

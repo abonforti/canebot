@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.telegram.cane.constants.CaneConstants;
 import org.telegram.cane.core.DBUtils;
 import org.telegram.cane.processors.AbstractMessageProcessor;
@@ -37,7 +36,6 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
 import io.github.nixtabyte.telegram.jtelebot.response.json.User;
 
 public class ArbitroProcessor extends AbstractMessageProcessor implements MessageProcessor {
-    private static final Logger LOG = Logger.getLogger(ArbitroProcessor.class);
 
     private List<String> arbitroCommands = new ArrayList<>();
     private final int imageIndex = 2;
@@ -50,6 +48,11 @@ public class ArbitroProcessor extends AbstractMessageProcessor implements Messag
     public ArbitroProcessor() {
         // Trying to parse aliases from table
         initAliases();
+    }
+
+    @Override
+    protected boolean isUnderAuthentication() {
+        return false;
     }
 
     @Override
@@ -184,7 +187,8 @@ public class ArbitroProcessor extends AbstractMessageProcessor implements Messag
     }
 
     /**
-     * Iterates over a configured set of aliases, and if, one of them is contained within message, replies with random image
+     * Iterates over a configured set of aliases, and if, one of them is contained within message, replies with random
+     * image
      * 
      * @param message
      * @param requestHandler
@@ -212,14 +216,6 @@ public class ArbitroProcessor extends AbstractMessageProcessor implements Messag
             }
         }
 
-        LOG.info("Searching image for id: " + message.getText());
-        final Blob b = getArbitroFromId(message.getText());
-        if (b != null) {
-            final File file = downloadFile(b);
-            final TelegramRequest request = TelegramRequestFactory.createSendPhotoRequest(message.getChat().getId(), file, null, null, null);
-            requestHandler.sendRequest(request);
-            return true;
-        }
         return false;
     }
 
@@ -246,7 +242,7 @@ public class ArbitroProcessor extends AbstractMessageProcessor implements Messag
      *            the blob to be loaded
      * @return the saved file
      */
-    private File downloadFile(Blob blob) {
+    protected File downloadFile(Blob blob) {
         OutputStream out = null;
         byte[] buff = null;
         try {

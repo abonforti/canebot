@@ -7,6 +7,6 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 
 public interface MessageProcessor {
 
-    public boolean process(Message m, final RequestHandler requestHandler) throws JsonParsingException, TelegramServerException;
+    public boolean processIncomingMessage(Message m, final RequestHandler requestHandler) throws JsonParsingException, TelegramServerException;
 
 }

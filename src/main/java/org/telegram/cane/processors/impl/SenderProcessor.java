@@ -13,6 +13,11 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 
 public class SenderProcessor extends AbstractMessageProcessor implements MessageProcessor {
 
+    @Override
+    protected boolean isUnderAuthentication() {
+        return false;
+    }
+
     static final String BONFORTI_USERNAME = "alestark";
 
     boolean enabled = false;

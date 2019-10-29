@@ -13,6 +13,11 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 public class EventProcessor extends AbstractMessageProcessor implements MessageProcessor {
 
     @Override
+    protected boolean isUnderAuthentication() {
+        return false;
+    }
+
+    @Override
     public boolean process(Message incomingMsg, RequestHandler requestHandler) throws JsonParsingException, TelegramServerException {
         final String msg = findEventResponse(incomingMsg);
         if (StringUtils.isNotEmpty(msg)) {

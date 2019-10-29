@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.telegram.cane.constants.CaneConstants;
 import org.telegram.cane.core.DBUtils;
 import org.telegram.cane.processors.AbstractMessageProcessor;
@@ -21,7 +20,10 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 
 public class MosconiProcessor extends AbstractMessageProcessor implements MessageProcessor {
 
-    private static final Logger LOG = Logger.getLogger(MosconiProcessor.class);
+    @Override
+    protected boolean isUnderAuthentication() {
+        return false;
+    }
 
     /**
      * returns a randomic mosconi quote if mosconi has been detected as input msg, null otherwise

@@ -15,7 +15,6 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.telegram.cane.constants.CaneConstants;
@@ -31,14 +30,17 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 
 public class SearchProcessor extends AbstractMessageProcessor implements MessageProcessor {
 
+    @Override
+    protected boolean isUnderAuthentication() {
+        return false;
+    }
+
     private static final String LINK = "link";
     private static final String ITEMS = "items";
     private static final String URL_PART2 = "&searchType=image&fileType=jpg&alt=json&lr=lang_it";
     private static final String URL_PART1 = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCemUqQy2UUfAd3X7ZsDgJNtZEJf_dGPX0&cx=001190623412265690532:hqcxjj-hhck&q=";
     private static final String FILE_EXT = "jpg";
     private static final String FILE_NAME = "imgSrc";
-
-    private static final Logger LOG = Logger.getLogger(SearchProcessor.class);
 
     @Override
     public boolean process(final Message message, RequestHandler requestHandler) throws JsonParsingException, TelegramServerException {

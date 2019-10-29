@@ -1,20 +1,5 @@
 package org.telegram.cane.processors.impl;
 
-import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
-import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
-import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.telegram.cane.constants.CaneConstants;
-import org.telegram.cane.fanta.data.Match;
-import org.telegram.cane.processors.AbstractMessageProcessor;
-import org.telegram.cane.processors.MessageProcessor;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,6 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.telegram.cane.constants.CaneConstants;
+import org.telegram.cane.fanta.data.Match;
+import org.telegram.cane.processors.AbstractMessageProcessor;
+import org.telegram.cane.processors.MessageProcessor;
+
+import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
+import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
+import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
+import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
+
 /**
  * Created by Federico on 22/09/16.
  */
@@ -35,8 +35,10 @@ public class FantaProcessor extends AbstractMessageProcessor implements MessageP
     public static final String SPAN_NUMBIG4_PULL_RIGHT = "span.numbig4.pull-right";
     public static final String NUMBIG_3 = "numbig3";
 
-    private static final Logger LOG = Logger.getLogger(FantaProcessor.class);
-
+    @Override
+    protected boolean isUnderAuthentication() {
+        return false;
+    }
 
     @Override
     public boolean process(final Message message, RequestHandler requestHandler) {
@@ -45,9 +47,9 @@ public class FantaProcessor extends AbstractMessageProcessor implements MessageP
         String text = message.getText();
         if (StringUtils.isNotEmpty(text)) {
             Document document = null;
-            if (StringUtils.containsIgnoreCase(text,CaneConstants.FANTASERIEA)) {
+            if (StringUtils.containsIgnoreCase(text, CaneConstants.FANTASERIEA)) {
                 document = getDocument(CaneConstants.SERIEA_ID);
-            } else if (StringUtils.containsIgnoreCase(text,CaneConstants.FANTACOPPA)) {
+            } else if (StringUtils.containsIgnoreCase(text, CaneConstants.FANTACOPPA)) {
                 document = getDocument(CaneConstants.CUP_ID);
             }
             if (document != null) {
@@ -57,7 +59,7 @@ public class FantaProcessor extends AbstractMessageProcessor implements MessageP
                 for (Element itemBox : itemBoxes) {
                     Elements teams = itemBox.select(".team-name");
                     Elements goals = itemBox.select(".team-score");
-                    String matchResult = goals.size() > 1 ? goals.get(0).text() + "-"+ goals.get(1).text() : "Riposa";
+                    String matchResult = goals.size() > 1 ? goals.get(0).text() + "-" + goals.get(1).text() : "Riposa";
                     String team1 = teams.size() > 0 ? teams.get(0).text() : "";
                     String team2 = teams.size() > 1 ? teams.get(1).text() : "";
                     Match match = new Match(team1, team2, matchResult, null);
@@ -65,7 +67,7 @@ public class FantaProcessor extends AbstractMessageProcessor implements MessageP
                 }
                 try {
                     for (String matchString : matches) {
-                        response = response.concat(matchString+" \r\n");
+                        response = response.concat(matchString + " \r\n");
                     }
                     replyTextMessage(response, message, requestHandler);
                     return true;
