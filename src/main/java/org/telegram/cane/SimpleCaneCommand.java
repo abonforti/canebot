@@ -1,12 +1,8 @@
 package org.telegram.cane;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +12,7 @@ import org.telegram.cane.core.PropsUtils;
 import org.telegram.cane.core.backup.DropBoxBackupper;
 import org.telegram.cane.processors.MessageProcessor;
 import org.telegram.cane.processors.impl.ArbitroProcessor;
+import org.telegram.cane.processors.impl.BackupProcessor;
 import org.telegram.cane.processors.impl.EventProcessor;
 import org.telegram.cane.processors.impl.FantaProcessor;
 import org.telegram.cane.processors.impl.GoepArbitroProcessor;
@@ -56,6 +53,7 @@ public class SimpleCaneCommand extends AbstractCommand {
         GoepArbitroProcessor goepArbitroProcessor = new GoepArbitroProcessor();
         SenderProcessor senderProcessor = new SenderProcessor();
         FantaProcessor fantaProcessor = new FantaProcessor();
+        BackupProcessor backupProcessor = new BackupProcessor();
 
         processors.add(usergroupProcessor);
         processors.add(fantaProcessor);
@@ -66,6 +64,7 @@ public class SimpleCaneCommand extends AbstractCommand {
         processors.add(searchProcessor);
         processors.add(senderProcessor);
         processors.add(textProcessor);
+        processors.add(backupProcessor);
 
     }
 
@@ -78,29 +77,10 @@ public class SimpleCaneCommand extends AbstractCommand {
 
             @Override
             public void run() {
-                String fileName = PropsUtils.getProperty("db.backup.path");
-                fileName = fileName + PropsUtils.getProperty("db.backup.filename");
-                LOG.info("Starting DB backup procedure for file: " + fileName);
-                File f = new File(fileName);
-                if (f.exists()) {
-                    dbBackupper.backupFile(f, buildBackupFileName());
-                    try {
-                        Files.delete(f.toPath());
-                        LOG.info("File " + fileName + " deleted after successful backup");
-                    } catch (final IOException ex) {
-                        LOG.error("Error while deleting backup file");
-                    }
-                } else {
-                    LOG.warn("No backup file found in path: " + fileName);
-                }
+                dbBackupper.backupFile();
             }
         }, minutesTillMidnight(), 1440, TimeUnit.MINUTES);
 
-    }
-
-    private String buildBackupFileName() {
-        Calendar c = Calendar.getInstance();
-        return "Backup_" + c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
     }
 
     private long minutesTillMidnight() {
