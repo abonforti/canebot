@@ -26,7 +26,7 @@ public class CaneConstants {
     public static final String SELECT_PK_FROM_USERGROUPS = "SELECT PK FROM " + GROUPS_TABLE + " WHERE groupname=LOWER(?)";
     public static final String INSERT_USER_QUERY = "INSERT INTO " + USERS_TABLE + " (telegramId) values LOWER(?);";
     public static final String INSERT_GROUP_QUERY = "INSERT INTO " + GROUPS_TABLE + " (groupname) values LOWER(?);";
-    public static final String INSERT_USER_GROUP_QUERY = "INSERT INTO user2groups VALUES ((select pk from users where telegramId = ?), (select pk from usergroups where groupname = ?));";
+    public static final String INSERT_USER_GROUP_QUERY = "INSERT INTO user2groups VALUES ((select pk from users where telegramId = LOWER(?)), (select pk from usergroups where groupname = LOWER(?)));";
 
     /**
      * SQL-query-related-arbitri constants
