@@ -9,10 +9,10 @@ public class CaneConstants {
     /**
      * SQL-query-related constants
      */
-    public static final String INSULTI_TABLE = "INSULTI";
+    public static final String INSULTI_TABLE = "insulti";
     public static final String MOSCONI_TABLE = "mosconi";
-    public static final String USERS_TABLE = "USERS";
-    public static final String GROUPS_TABLE = "USERGROUPS";
+    public static final String USERS_TABLE = "users";
+    public static final String GROUPS_TABLE = "usergroups";
     public static final String INSERT_QUERY = "INSERT INTO `" + INSULTI_TABLE + "` (`input`, `output`) VALUES (?, ?);";
     public static final String DELETE_QUERY = "DELETE FROM `" + INSULTI_TABLE + "` WHERE `input` = ? AND `output` = ?;";
     public static final String INSULTI_QUERY = SELECT_STAR_FROM + INSULTI_TABLE + "` WHERE LOWER(input) LIKE LOWER(?);";
@@ -22,11 +22,11 @@ public class CaneConstants {
     /**
      * SQL-query-related-userandgroups
      */
-    public static final String SELECT_PK_FROM_USER = "SELECT PK FROM " + USERS_TABLE + " WHERE telegramId=?";
-    public static final String SELECT_PK_FROM_USERGROUPS = "SELECT PK FROM " + GROUPS_TABLE + " WHERE groupname=?";
+    public static final String SELECT_PK_FROM_USER = "SELECT PK FROM " + USERS_TABLE + " WHERE telegramId=LOWER(?)";
+    public static final String SELECT_PK_FROM_USERGROUPS = "SELECT PK FROM " + GROUPS_TABLE + " WHERE groupname=LOWER(?)";
     public static final String INSERT_USER_QUERY = "INSERT INTO " + USERS_TABLE + " (telegramId) values LOWER(?);";
     public static final String INSERT_GROUP_QUERY = "INSERT INTO " + GROUPS_TABLE + " (groupname) values LOWER(?);";
-    public static final String INSERT_USER_GROUP_QUERY = "INSERT INTO user2groups VALUES ((select pk from users where telegramId = ?), (select pk from canebotdb.usergroups where groupname = ?));";
+    public static final String INSERT_USER_GROUP_QUERY = "INSERT INTO user2groups VALUES ((select pk from users where telegramId = ?), (select pk from usergroups where groupname = ?));";
 
     /**
      * SQL-query-related-arbitri constants
