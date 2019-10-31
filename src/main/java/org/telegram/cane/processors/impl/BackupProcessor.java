@@ -26,7 +26,12 @@ public class BackupProcessor extends AbstractMessageProcessor implements Message
 
         String msg = message.getText();
         if (StringUtils.isNotEmpty(msg) && StringUtils.trim(msg).equalsIgnoreCase(PERFORMBACKUP_COMMAND)) {
-            return dbBackupper.backupFile();
+            boolean backupresult = dbBackupper.backupFile();
+            if (backupresult) {
+                replyTextMessage("Backup performed correctly, " + extractSenderUserName(message), message, requestHandler);
+            } else {
+                replyTextMessage(extractSenderUserName(message) + ", qualcosa è andato storto, nel backup. Controlla sui log!", message, requestHandler);
+            }
         }
         return false;
     }
