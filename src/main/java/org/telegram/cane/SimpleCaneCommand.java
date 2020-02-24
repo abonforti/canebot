@@ -3,6 +3,7 @@ package org.telegram.cane;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ import org.telegram.cane.processors.impl.GoepArbitroProcessor;
 import org.telegram.cane.processors.impl.MosconiProcessor;
 import org.telegram.cane.processors.impl.SearchProcessor;
 import org.telegram.cane.processors.impl.SenderProcessor;
+import org.telegram.cane.processors.impl.SerieAProcessor;
 import org.telegram.cane.processors.impl.TextProcessor;
 import org.telegram.cane.processors.impl.UsergroupProcessor;
 
@@ -52,6 +54,7 @@ public class SimpleCaneCommand extends AbstractCommand {
         ArbitroProcessor arbitroProcessor = new ArbitroProcessor();
         GoepArbitroProcessor goepArbitroProcessor = new GoepArbitroProcessor();
         SenderProcessor senderProcessor = new SenderProcessor();
+        SerieAProcessor serieAProcessor = new SerieAProcessor();
         FantaProcessor fantaProcessor = new FantaProcessor();
         BackupProcessor backupProcessor = new BackupProcessor();
 
@@ -61,6 +64,7 @@ public class SimpleCaneCommand extends AbstractCommand {
         processors.add(mosconiProcessor);
         processors.add(arbitroProcessor);
         processors.add(goepArbitroProcessor);
+        processors.add(serieAProcessor);
         processors.add(searchProcessor);
         processors.add(senderProcessor);
         processors.add(textProcessor);
@@ -81,6 +85,11 @@ public class SimpleCaneCommand extends AbstractCommand {
             }
         }, minutesTillMidnight(), 1440, TimeUnit.MINUTES);
 
+    }
+
+    protected String buildBackupFileName() {
+        Calendar c = Calendar.getInstance();
+        return "Backup_" + c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
     }
 
     private long minutesTillMidnight() {
