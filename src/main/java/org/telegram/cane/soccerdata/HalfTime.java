@@ -12,36 +12,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
-    "name"
+    "homeTeam",
+    "awayTeam"
 })
-public class AwayTeam {
+public class HalfTime {
 
-    @JsonProperty("id")
-    private Integer id;
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("homeTeam")
+    private Object homeTeam;
+    @JsonProperty("awayTeam")
+    private Object awayTeam;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("id")
-    public Integer getId() {
-        return id;
+    @JsonProperty("homeTeam")
+    public Object getHomeTeam() {
+        return homeTeam;
     }
 
-    @JsonProperty("id")
-    public void setId(Integer id) {
-        this.id = id;
+    @JsonProperty("homeTeam")
+    public void setHomeTeam(Object homeTeam) {
+        this.homeTeam = homeTeam;
     }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("awayTeam")
+    public Object getAwayTeam() {
+        return awayTeam;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("awayTeam")
+    public void setAwayTeam(Object awayTeam) {
+        this.awayTeam = awayTeam;
     }
 
     @JsonAnyGetter

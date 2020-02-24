@@ -2,317 +2,69 @@
 package org.telegram.cane.soccerdata;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.codehaus.jackson.annotate.JsonAnyGetter;
-import org.codehaus.jackson.annotate.JsonAnySetter;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "_links", "position", "teamName", "crestURI", "playedGames", "points", "goals", "goalsAgainst", "goalDifference", "wins", "draws", "losses", "home", "away" })
 public class Standing {
 
-    @JsonProperty("_links")
-    private Links_ Links;
-    @JsonProperty("position")
-    private Integer position;
-    @JsonProperty("teamName")
-    private String teamName;
-    @JsonProperty("crestURI")
-    private String crestURI;
-    @JsonProperty("playedGames")
-    private Integer playedGames;
-    @JsonProperty("points")
-    private Integer points;
-    @JsonProperty("goals")
-    private Integer goals;
-    @JsonProperty("goalsAgainst")
-    private Integer goalsAgainst;
-    @JsonProperty("goalDifference")
-    private Integer goalDifference;
-    @JsonProperty("wins")
-    private Integer wins;
-    @JsonProperty("draws")
-    private Integer draws;
-    @JsonProperty("losses")
-    private Integer losses;
-    @JsonProperty("home")
-    private Home home;
-    @JsonProperty("away")
-    private Away away;
+    @JsonProperty("stage")
+    private String stage;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("group")
+    private Object group;
+    @JsonProperty("table")
+    private List<Table> table = null;
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     * 
-     * @return The Links
-     */
-    @JsonProperty("_links")
-    public Links_ getLinks() {
-        return Links;
+    @JsonProperty("stage")
+    public String getStage() {
+        return stage;
     }
 
-    /**
-     * 
-     * @param Links
-     *            The _links
-     */
-    @JsonProperty("_links")
-    public void setLinks(Links_ Links) {
-        this.Links = Links;
+    @JsonProperty("stage")
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 
-    /**
-     * 
-     * @return The position
-     */
-    @JsonProperty("position")
-    public Integer getPosition() {
-        return position;
+    @JsonProperty("type")
+    public String getType() {
+        return type;
     }
 
-    /**
-     * 
-     * @param position
-     *            The position
-     */
-    @JsonProperty("position")
-    public void setPosition(Integer position) {
-        this.position = position;
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
     }
 
-    /**
-     * 
-     * @return The teamName
-     */
-    @JsonProperty("teamName")
-    public String getTeamName() {
-        return teamName;
+    @JsonProperty("group")
+    public Object getGroup() {
+        return group;
     }
 
-    /**
-     * 
-     * @param teamName
-     *            The teamName
-     */
-    @JsonProperty("teamName")
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    @JsonProperty("group")
+    public void setGroup(Object group) {
+        this.group = group;
     }
 
-    /**
-     * 
-     * @return The crestURI
-     */
-    @JsonProperty("crestURI")
-    public String getCrestURI() {
-        return crestURI;
+    @JsonProperty("table")
+    public List<Table> getTable() {
+        return table;
     }
 
-    /**
-     * 
-     * @param crestURI
-     *            The crestURI
-     */
-    @JsonProperty("crestURI")
-    public void setCrestURI(String crestURI) {
-        this.crestURI = crestURI;
-    }
-
-    /**
-     * 
-     * @return The playedGames
-     */
-    @JsonProperty("playedGames")
-    public Integer getPlayedGames() {
-        return playedGames;
-    }
-
-    /**
-     * 
-     * @param playedGames
-     *            The playedGames
-     */
-    @JsonProperty("playedGames")
-    public void setPlayedGames(Integer playedGames) {
-        this.playedGames = playedGames;
-    }
-
-    /**
-     * 
-     * @return The points
-     */
-    @JsonProperty("points")
-    public Integer getPoints() {
-        return points;
-    }
-
-    /**
-     * 
-     * @param points
-     *            The points
-     */
-    @JsonProperty("points")
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    /**
-     * 
-     * @return The goals
-     */
-    @JsonProperty("goals")
-    public Integer getGoals() {
-        return goals;
-    }
-
-    /**
-     * 
-     * @param goals
-     *            The goals
-     */
-    @JsonProperty("goals")
-    public void setGoals(Integer goals) {
-        this.goals = goals;
-    }
-
-    /**
-     * 
-     * @return The goalsAgainst
-     */
-    @JsonProperty("goalsAgainst")
-    public Integer getGoalsAgainst() {
-        return goalsAgainst;
-    }
-
-    /**
-     * 
-     * @param goalsAgainst
-     *            The goalsAgainst
-     */
-    @JsonProperty("goalsAgainst")
-    public void setGoalsAgainst(Integer goalsAgainst) {
-        this.goalsAgainst = goalsAgainst;
-    }
-
-    /**
-     * 
-     * @return The goalDifference
-     */
-    @JsonProperty("goalDifference")
-    public Integer getGoalDifference() {
-        return goalDifference;
-    }
-
-    /**
-     * 
-     * @param goalDifference
-     *            The goalDifference
-     */
-    @JsonProperty("goalDifference")
-    public void setGoalDifference(Integer goalDifference) {
-        this.goalDifference = goalDifference;
-    }
-
-    /**
-     * 
-     * @return The wins
-     */
-    @JsonProperty("wins")
-    public Integer getWins() {
-        return wins;
-    }
-
-    /**
-     * 
-     * @param wins
-     *            The wins
-     */
-    @JsonProperty("wins")
-    public void setWins(Integer wins) {
-        this.wins = wins;
-    }
-
-    /**
-     * 
-     * @return The draws
-     */
-    @JsonProperty("draws")
-    public Integer getDraws() {
-        return draws;
-    }
-
-    /**
-     * 
-     * @param draws
-     *            The draws
-     */
-    @JsonProperty("draws")
-    public void setDraws(Integer draws) {
-        this.draws = draws;
-    }
-
-    /**
-     * 
-     * @return The losses
-     */
-    @JsonProperty("losses")
-    public Integer getLosses() {
-        return losses;
-    }
-
-    /**
-     * 
-     * @param losses
-     *            The losses
-     */
-    @JsonProperty("losses")
-    public void setLosses(Integer losses) {
-        this.losses = losses;
-    }
-
-    /**
-     * 
-     * @return The home
-     */
-    @JsonProperty("home")
-    public Home getHome() {
-        return home;
-    }
-
-    /**
-     * 
-     * @param home
-     *            The home
-     */
-    @JsonProperty("home")
-    public void setHome(Home home) {
-        this.home = home;
-    }
-
-    /**
-     * 
-     * @return The away
-     */
-    @JsonProperty("away")
-    public Away getAway() {
-        return away;
-    }
-
-    /**
-     * 
-     * @param away
-     *            The away
-     */
-    @JsonProperty("away")
-    public void setAway(Away away) {
-        this.away = away;
+    @JsonProperty("table")
+    public void setTable(List<Table> table) {
+        this.table = table;
     }
 
     @JsonAnyGetter

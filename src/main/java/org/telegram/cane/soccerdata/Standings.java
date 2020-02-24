@@ -4,42 +4,28 @@ package org.telegram.cane.soccerdata;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "count",
-    "filters",
-    "competition",
-    "matches"
-})
-public class MatchDay {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Standings {
 
-    @JsonProperty("count")
-    private Integer count;
     @JsonProperty("filters")
     private Filters filters;
     @JsonProperty("competition")
     private Competition competition;
-    @JsonProperty("matches")
-    private List<Match> matches = null;
+    @JsonProperty("season")
+    private Season season;
+    @JsonProperty("standings")
+    private List<Standing> standings = null;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("count")
-    public Integer getCount() {
-        return count;
-    }
-
-    @JsonProperty("count")
-    public void setCount(Integer count) {
-        this.count = count;
-    }
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("filters")
     public Filters getFilters() {
@@ -61,14 +47,24 @@ public class MatchDay {
         this.competition = competition;
     }
 
-    @JsonProperty("matches")
-    public List<Match> getMatches() {
-        return matches;
+    @JsonProperty("season")
+    public Season getSeason() {
+        return season;
     }
 
-    @JsonProperty("matches")
-    public void setMatches(List<Match> matches) {
-        this.matches = matches;
+    @JsonProperty("season")
+    public void setSeason(Season season) {
+        this.season = season;
+    }
+
+    @JsonProperty("standings")
+    public List<Standing> getStandings() {
+        return standings;
+    }
+
+    @JsonProperty("standings")
+    public void setStandings(List<Standing> standings) {
+        this.standings = standings;
     }
 
     @JsonAnyGetter

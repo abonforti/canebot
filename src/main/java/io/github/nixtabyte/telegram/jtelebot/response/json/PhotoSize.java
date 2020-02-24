@@ -10,18 +10,28 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 
  * This object represents one size of a photo or a file / sticker thumbnail.
  * 
  * @since 0.0.1
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PhotoSize {
     /**
      * Unique identifier for this file
      */
     @JsonProperty("file_id")
     private String fileId;
+
+    /**
+     * Unique identifier for this file
+     */
+    @JsonProperty("file_unique_id")
+    private String fileUniqueId;
+
     /**
      * Photo width
      */
@@ -191,6 +201,14 @@ public class PhotoSize {
     @Override
     public String toString() {
         return "PhotoSize [fileId=" + fileId + ", width=" + width + ", height=" + height + ", file_size=" + fileSize + "]";
+    }
+
+    public String getFileUniqueId() {
+        return fileUniqueId;
+    }
+
+    public void setFileUniqueId(String fileUniqueId) {
+        this.fileUniqueId = fileUniqueId;
     }
 
 }
