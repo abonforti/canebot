@@ -30,7 +30,7 @@ public class BackupProcessor extends AbstractMessageProcessor implements Message
             if (backupresult) {
                 replyTextMessage("Backup performed correctly, " + extractSenderUserName(message), message, requestHandler);
             } else {
-                replyTextMessage(extractSenderUserName(message) + ", qualcosa è andato storto, nel backup. Controlla sui log!", message, requestHandler);
+                replyTextMessage(extractSenderUserName(message) + ", qualcosa Ã¨ andato storto, nel backup. Controlla sui log!", message, requestHandler);
             }
         }
         return false;

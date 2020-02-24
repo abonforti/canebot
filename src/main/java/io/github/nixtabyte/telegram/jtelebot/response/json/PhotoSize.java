@@ -9,6 +9,7 @@
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
