@@ -1,5 +1,6 @@
 package org.telegram.cane.core;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -21,6 +22,8 @@ public class PropsUtils {
 
     private static Properties props;
 
+    private static final String LOCAL_PROPERTIES_PATH = "/home/canebot/canebot/local.properties";
+
     private PropsUtils() {
         // do nothing
     }
@@ -39,15 +42,17 @@ public class PropsUtils {
     }
 
     protected static void loadPropertyFile(final String fileName, Properties props) throws IOException {
-        final InputStream inStream = SimpleCaneCommand.class.getClassLoader().getResourceAsStream(fileName);
-        if (inStream != null) {
-            props.load(inStream);
-            inStream.close();
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Properties loaded correctly.");
-            }
-        } else {
-            LOG.error("Resource file [" + fileName + "] not found loaded correctly.");
+        InputStream inStream = SimpleCaneCommand.class.getClassLoader().getResourceAsStream(fileName);
+
+        if (inStream == null) {
+            LOG.warn("Couldn't load " + fileName + ", trying to rebuild it manually using " + LOCAL_PROPERTIES_PATH);
+            inStream = new FileInputStream(LOCAL_PROPERTIES_PATH);
+        }
+
+        props.load(inStream);
+        inStream.close();
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Properties loaded correctly.");
         }
     }
 
