@@ -47,7 +47,7 @@
 		<dependency> <!-- JSON Lib -->
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20151123</version>
+			<version>20230227</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.mariadb.jdbc</groupId>
